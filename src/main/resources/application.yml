@@ -1,0 +1,47 @@
+server:
+  port: 6969
+springdoc:
+  api-docs:
+    enabled: true
+  use-fqn: false
+  swagger-ui:
+    path: /
+    disable-swagger-default-url: true
+  packages-to-scan: io.x99.priceengine.controller
+spring:
+  retry:
+    backoff-delay: 1000
+    maxDelay: 5000
+    maxAttempts: 3
+  application:
+    name: 99x Price Engine API
+    version: '@version@'
+  datasource:
+    url: jdbc:mysql://localhost:3307/99xdb?useSSL=false
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 2
+      maximum-pool-size: 2
+      idleTimeout: 600000
+      maxLifetime: 1800000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: validate
+    database: mysql
+    show-sql: false
+  security:
+    user:
+      name: root
+      password: root
+  messages:
+    basename: messages
